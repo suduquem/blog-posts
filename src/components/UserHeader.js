@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchUser } from '../actions';
+//import { fetchUser } from '../actions';
 
 class UserHeader extends React.Component {
-  componentDidMount() {
-    this.props.fetchUser(this.props.userId);
-  }
+  //Ya no se requiere que este componente busque su propia data
+  // componentDidMount() {
+  //   this.props.fetchUser(this.props.userId);
+  // }
+
   render() {
     /* id es retornado por la API de Users
     userId es el id que usa la API de Posts */
@@ -37,4 +39,5 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 //First argument: null - si no se tiene mapStateToProps
-export default connect(mapStateToProps, { fetchUser })(UserHeader);
+//export default connect(mapStateToProps, { fetchUser })(UserHeader);
+export default connect(mapStateToProps)(UserHeader);
