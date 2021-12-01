@@ -7,9 +7,14 @@ class UserHeader extends React.Component {
     this.props.fetchUser(this.props.userId);
   }
   render() {
-    //id es retornado por la API de Users
-    //userId es el id que usa la API de Posts
-    const user = this.props.users.find((user) => user.id === this.props.userId);
+    /* id es retornado por la API de Users
+    userId es el id que usa la API de Posts */
+
+    //const user = this.props.users.find((user) => user.id === this.props.userId);
+    /* Este cálculo se mueve para mapStateToProps con el fin de hacer
+    el componente más reusable */
+
+    const { user } = this.props;
 
     if (!user) {
       return null;
@@ -22,8 +27,13 @@ class UserHeader extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { users: state.users };
+const mapStateToProps = (state, ownProps) => {
+  //mapStateToProps se usa para hacer computaciones sobre el state
+
+  //ownProps: referencia de las props que le entran al componente
+  return { user: state.users.find((user) => user.id === ownProps.userId) };
+  //id es retornado por la API de Users
+  //userId es el id que usa la API de Posts
 };
 
 //First argument: null - si no se tiene mapStateToProps
